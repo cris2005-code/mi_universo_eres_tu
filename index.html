@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080b25">
+<meta name="description" content="Un pequeño universo de poemas y promesas de amor.">
+<title>Mi Universo Eres Tú ✨</title>
+<style>
+:root{--gold:#ffe6a3;--pink:#ffb7d5;--white:#fff8ef;--muted:#c8c9e8}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Georgia,"Times New Roman",serif;color:var(--white);background:#07091e}
+body{overflow-x:hidden}
+#space{position:fixed;inset:0;width:100%;height:100%;z-index:0;background:radial-gradient(ellipse at 50% 40%,#1c2454 0%,#101536 35%,#080b25 70%,#03040f 100%)}
+.nebula{position:fixed;inset:-15%;z-index:0;pointer-events:none;background:radial-gradient(ellipse at 20% 25%,#653c9b33,transparent 32%),radial-gradient(ellipse at 80% 65%,#b3448230,transparent 30%),radial-gradient(ellipse at 55% 5%,#3568ad2b,transparent 28%);filter:blur(16px);animation:drift 22s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate(3%,-2%) scale(1.08)}}
+main{position:relative;z-index:1;min-height:100vh;padding:36px 18px 24px;display:flex;flex-direction:column;align-items:center}
+.eyebrow{font:600 .72rem/1.4 system-ui,sans-serif;letter-spacing:.28em;text-transform:uppercase;color:#e9d8ff;text-align:center}
+h1{font-size:clamp(2.5rem,7vw,5rem);font-weight:normal;line-height:1.02;text-align:center;margin:14px 0 10px;text-shadow:0 0 28px #d8b4ff70}
+h1 span{color:var(--gold);font-style:italic}
+.subtitle{max-width:560px;text-align:center;color:#deddf4;font:1rem/1.7 system-ui,sans-serif;margin:0 auto}
+.hint{margin-top:22px;color:var(--gold);font: .82rem/1.5 system-ui,sans-serif;letter-spacing:.04em;text-align:center}
+#universe{width:min(100%,940px);height:clamp(370px,57vh,560px);position:relative;margin:12px auto 0;border:1px solid #b6a5ff22;border-radius:28px;overflow:hidden;background:linear-gradient(135deg,#ffffff05,#9d8bff08);box-shadow:inset 0 0 80px #4b3e9c12,0 20px 80px #0002}
+#universe:before{content:"";position:absolute;inset:9%;border:1px solid #c9b6ff13;border-radius:50%;transform:rotate(-18deg) scaleY(.5);pointer-events:none}
+#universe:after{content:"";position:absolute;inset:18% 5%;border:1px solid #c9b6ff10;border-radius:50%;transform:rotate(28deg) scaleY(.45);pointer-events:none}
+.star{position:absolute;z-index:2;border:0;background:transparent;color:var(--gold);cursor:pointer;padding:10px;transform:translate(-50%,-50%);border-radius:50%;transition:transform .22s ease,filter .22s ease;filter:drop-shadow(0 0 7px #ffe9a0aa);-webkit-tap-highlight-color:transparent}
+.star:hover,.star:focus-visible{transform:translate(-50%,-50%) scale(1.45);filter:drop-shadow(0 0 15px #fff1a8);outline:none}
+.star .glyph{display:block;font-size:var(--size,24px);line-height:1}
+.star .number{display:block;font:10px system-ui,sans-serif;color:#e6ddff;margin-top:5px;opacity:.75}
+.star:after{content:"";position:absolute;inset:2px;border-radius:50%;animation:pulse 2.8s ease-in-out infinite;pointer-events:none}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 #ffe6a300}50%{box-shadow:0 0 14px 5px #ffe6a31c}}
+.center-heart{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:clamp(2rem,6vw,4rem);color:#ff263f;text-shadow:0 0 12px #ff1b3d,0 0 28px #ff1b3d99;animation:heartbeat 3s ease-in-out infinite;z-index:3;cursor:pointer;border:0;background:transparent;padding:12px;line-height:1;-webkit-tap-highlight-color:transparent}.center-heart:hover,.center-heart:focus-visible{filter:brightness(1.25);outline:2px solid #ff8b9b66;outline-offset:5px;border-radius:50%}
+@keyframes heartbeat{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.1)}}
+.constellation-label{position:absolute;bottom:16px;left:0;right:0;text-align:center;color:#a9abd5;font: .72rem system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;pointer-events:none}
+footer{position:relative;z-index:1;text-align:center;color:#aaaed5;font: .8rem/1.6 system-ui,sans-serif;margin-top:20px}
+footer strong{color:#f6d9f0;font-weight:500}
+.modal{position:fixed;inset:0;z-index:5;display:none;align-items:center;justify-content:center;padding:20px;background:#020311c9;backdrop-filter:blur(9px)}
+.modal.open{display:flex;animation:fade .22s ease}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.poem-card{position:relative;width:min(100%,500px);padding:36px 28px 28px;text-align:center;border:1px solid #f8dca755;border-radius:24px;background:radial-gradient(ellipse at top,#34305f,#151832 60%,#101329);box-shadow:0 0 70px #9d70ff2b;animation:rise .3s ease}
+@keyframes rise{from{transform:translateY(12px) scale(.98)}to{transform:translateY(0) scale(1)}}
+.poem-star{font-size:1.7rem;color:var(--gold);text-shadow:0 0 16px #ffe6a3aa}
+#poemTitle{font-size:clamp(1.6rem,5vw,2.2rem);font-weight:normal;color:var(--gold);margin:14px 0 18px}
+#poemText{font-size:clamp(1.1rem,3.5vw,1.35rem);line-height:1.8;white-space:pre-line;color:#fff8f3;margin:0 0 25px}
+.signature{color:#f3bfdc;font-style:italic;font-size:1.05rem}
+.close{position:absolute;right:12px;top:10px;width:38px;height:38px;border-radius:50%;border:1px solid #ffffff30;background:#ffffff0a;color:white;font-size:1.5rem;cursor:pointer}
+.nav-buttons{display:flex;gap:10px;justify-content:center;margin-top:22px;flex-wrap:wrap}
+.nav-buttons button{border:1px solid #f8dca766;border-radius:999px;padding:10px 17px;background:#ffffff0a;color:#fff4d5;font: .85rem system-ui,sans-serif;cursor:pointer}
+.nav-buttons button:hover{background:#ffffff18}
+.nav-buttons button:disabled{opacity:.3;cursor:not-allowed}
+.small-note{color:#b5b7da;font: .75rem/1.5 system-ui,sans-serif;margin-top:16px}
+@media(max-width:520px){main{padding:30px 12px 18px}#universe{height:480px;border-radius:20px}.poem-card{padding:32px 21px 24px}.subtitle{font-size:.92rem}.star .number{font-size:9px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<canvas id="space" aria-hidden="true"></canvas><div class="nebula" aria-hidden="true"></div>
+<main>
+  <div class="eyebrow">Un lugar entre las estrellas</div>
+  <h1>Mi universo <span>eres tú</span></h1>
+  <p class="subtitle">Para mi prometida: treinta pequeñas formas de decirte que, entre tantos mundos posibles, siempre te elegiría a ti.</p>
+  <p class="hint">✧ Toca una estrella y descubre lo que guarda para ti ✧</p>
+  <section id="universe" aria-label="Universo interactivo de 30 estrellas">
+    <button class="center-heart" id="loveHeart" type="button" aria-label="Abrir mensaje para el amor de mi vida">♥</button>
+    <div class="constellation-label">30 estrellas · 30 razones para amarte</div>
+  </section>
+  <footer>Hecho con amor, para <strong>la dueña de mi corazón</strong>.<br>Un universo entero no alcanza para todo lo que siento por ti. ✨</footer>
+</main>
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="poemTitle">
+  <article class="poem-card">
+    <button class="close" id="close" aria-label="Cerrar poema">×</button>
+    <div class="poem-star">✦</div>
+    <h2 id="poemTitle">Para ti</h2>
+    <p id="poemText"></p>
+    <div class="signature">Con todo mi amor ♡</div>
+    <div class="nav-buttons">
+      <button id="prev">← Estrella anterior</button><button id="next">Siguiente estrella →</button>
+    </div>
+    <div class="small-note" id="count"></div>
+  </article>
+</div>
+<script>
+const poems = [
+["Mi lugar favorito","Si el mundo se vuelve inmenso\ny no sé dónde descansar,\nbusco tu mano entre la gente:\ncontigo siempre estoy en mi hogar."],
+["Tu sonrisa","Tu sonrisa enciende el día,\nhace a la tristeza retroceder;\nsi pudiera pedir un milagro,\npediría mil veces volverte a ver."],
+["Mi estrella","De todas las luces del cielo,\nninguna brilla como tú;\npor eso, cuando miro las estrellas,\nmi corazón dibuja tu luz."],
+["Elegirte","No te elegiría solo en los días\nque todo parece salir bien;\nte elijo en la calma y la tormenta,\nhoy, mañana y una y otra vez."],
+["Mi prometida","Qué bonito suena el futuro\ncuando lo imagino junto a ti;\nno sueño con una vida perfecta,\nsueño con vivirla contigo aquí."],
+["Tus ojos","En tus ojos encuentro caminos,\npequeños universos de paz;\nme pierdo mirando su brillo\ny no quiero que me encuentres jamás."],
+["Nuestro hogar","Hogar no es solo una casa,\nni una dirección en un papel;\nes donde me abrazas despacio\ny todo vuelve a estar bien."],
+["Mi casualidad favorita","Entre millones de historias,\nla vida nos dejó coincidir;\ny ahora mi casualidad favorita\nes tenerte cerquita de mí."],
+["Promesa","Prometo escucharte con calma,\nrespetar tu forma de soñar,\ny recordarte incluso en silencio\nque nunca dejaré de intentar amarte más."],
+["La luna sabe","La luna conoce mis secretos,\nlas noches que hablo de ti;\nsi alguna vez dudas de mi amor,\npregúntale cuánto sonrío por ti."],
+["Tu nombre","Tu nombre tiene algo mágico:\nlo pienso y cambia mi humor;\nson cuatro letras —o las que tenga—\nque mi corazón pronuncia con amor."],
+["Pequeños momentos","Quiero cafés y mañanas,\nrisas sin motivo especial,\ncaminar tomados de la mano\ny hacer de lo sencillo algo inmortal."],
+["Mi paz","No prometo borrar tus problemas,\npero sí quedarme a tu lado;\nser abrazo cuando estés cansada\ny un lugar seguro en días nublados."],
+["Un para siempre","El para siempre no es una palabra\nque se dice y se deja pasar;\nes elegirnos en cada capítulo\ny juntos la historia cuidar."],
+["Tu risa","Guarda un poco de tu risa\npara los días que vengan después;\nes mi canción preferida,\nmi alegría y mi amuleto de fe."],
+["A tu lado","A tu lado el tiempo corre,\npero el alma aprende a estar;\nquisiera detener cada instante\ny volverlo a comenzar."],
+["Mi aventura","Si la vida es un viaje largo,\nno necesito saber el final;\nme basta con llevar tu mano\ny contigo atreverme a avanzar."],
+["Lo que admiro","Admiro tu fuerza y tu ternura,\ntu manera tan tuya de ser;\nno solo amo lo que me haces sentir,\ntambién amo la persona que eres."],
+["Cuando estés triste","Si un día la tristeza te visita,\nno tienes que fingir estar bien;\npuedes descansar sobre mi hombro,\ny llorar si lo necesitas también."],
+["Distancia","Ni los kilómetros ni las horas\npueden cambiar lo que hay en mí;\nmi corazón conoce el camino\ny siempre encuentra cómo llegar a ti."],
+["Mi deseo","No pido riquezas ni estrellas,\nni que todo salga ideal;\npido salud, sueños compartidos\ny muchos años para verte brillar."],
+["Tu abrazo","Tu abrazo dura unos segundos,\npero su recuerdo dura más;\nes el sitio donde mi prisa se calma\ny mi corazón encuentra paz."],
+["Amor cotidiano","Te amo en las grandes promesas\ny en lo que nadie verá:\nen cuidarte, hacerte reír\ny preguntarte cómo te va."],
+["Nuestro mañana","Imagino fotos en las paredes,\nplanes, tropiezos y café;\ny en cada versión de ese futuro,\nmi amor, contigo me quedé."],
+["Eres suficiente","No necesitas ser perfecta,\nni esconder lo que te hace ser tú;\nte amo con tus días brillantes\ny con los días que pesan más."],
+["Mi persona","Eres mi noticia bonita,\nmi mensaje que quiero leer,\nla persona a quien cuento mis cosas\ny a quien primero quiero volver."],
+["Cielo compartido","Si algún día contamos estrellas,\nseguro perderé la cuenta al mirar;\nporque en cuanto estés a mi lado,\nsolo a ti voy a encontrar."],
+["Gracias por existir","Gracias por cada palabra,\npor tu paciencia y tu calor;\nmi vida es más bonita desde que\nle abriste una puerta a mi amor."],
+["La elección de cada día","Amarte es más que sentir mariposas:\nes cuidarte y saber conversar,\npedir perdón, celebrar tus victorias\ny todos los días volver a intentar."],
+["Mi universo eres tú","Si me ofrecieran mil universos,\nmil lunas y otro cielo azul,\nvolvería a escoger este mundo\nsi en él puedo compartirlo contigo, mi luz."]
+];
+const universe = document.getElementById('universe');
+const modal = document.getElementById('modal');
+const titleEl = document.getElementById('poemTitle');
+const textEl = document.getElementById('poemText');
+const countEl = document.getElementById('count');
+let current = 0;
+const positions = [
+[12,18],[25,12],[39,19],[57,13],[75,17],[88,27],[17,37],[31,32],[45,27],[64,32],
+[79,41],[9,55],[24,51],[39,44],[56,48],[72,55],[90,60],[14,74],[29,67],[44,78],
+[60,69],[78,77],[88,87],[8,88],[22,91],[36,88],[53,91],[68,88],[82,19],[50,61]
+];
+poems.forEach((poem,i)=>{
+  const btn=document.createElement('button');
+  btn.className='star';
+  btn.style.left=positions[i][0]+'%'; btn.style.top=positions[i][1]+'%';
+  btn.style.setProperty('--size',(i%5===0?27:i%3===0?22:18)+'px');
+  btn.setAttribute('aria-label',`Abrir estrella ${i+1}: ${poem[0]}`);
+  btn.innerHTML=`<span class="glyph">${i%4===0?'✦':i%4===1?'✧':i%4===2?'✶':'⋆'}</span><span class="number">${String(i+1).padStart(2,'0')}</span>`;
+  btn.addEventListener('click',()=>openPoem(i));
+  universe.appendChild(btn);
+});
+function openPoem(i){
+ document.querySelector('.nav-buttons').style.display='flex';
+ current=i; titleEl.textContent=poems[i][0]; textEl.textContent=poems[i][1];
+ countEl.textContent=`Estrella ${i+1} de ${poems.length}`;
+ document.getElementById('prev').disabled=i===0;
+ document.getElementById('next').disabled=i===poems.length-1;
+ modal.classList.add('open'); document.getElementById('close').focus();
+}
+document.getElementById('loveHeart').addEventListener('click',()=>{
+ titleEl.textContent='Para el amor de mi vida';
+ textEl.textContent='De todas las estrellas que existen, mi favorita eres tú. Gracias por llegar a mi vida, por hacer más bonitos mis días y por ser la persona con quien quiero compartir mis sueños. Si pudiera pedir un deseo, sería seguir eligiéndote cada día y construir contigo nuestra historia. Te amo, mi amor. ♥';
+ countEl.textContent='Mi corazón siempre te elige';
+ document.querySelector('.nav-buttons').style.display='none';
+ modal.classList.add('open'); document.getElementById('close').focus();
+});
+function closeModal(){modal.classList.remove('open');document.querySelector('.nav-buttons').style.display='flex'}
+document.getElementById('close').addEventListener('click',closeModal);
+document.getElementById('prev').addEventListener('click',()=>{if(current>0)openPoem(current-1)});
+document.getElementById('next').addEventListener('click',()=>{if(current<poems.length-1)openPoem(current+1)});
+modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();if(modal.classList.contains('open')&&e.key==='ArrowRight'&&current<poems.length-1)openPoem(current+1);if(modal.classList.contains('open')&&e.key==='ArrowLeft'&&current>0)openPoem(current-1)});
+// Starfield canvas
+const canvas=document.getElementById('space'),ctx=canvas.getContext('2d');let stars=[];
+function resize(){canvas.width=innerWidth*devicePixelRatio;canvas.height=innerHeight*devicePixelRatio;canvas.style.width=innerWidth+'px';canvas.style.height=innerHeight+'px';ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);stars=Array.from({length:Math.min(190,Math.floor(innerWidth/5))},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*1.4+.25,a:Math.random()*.7+.2,s:Math.random()*.008+.002,p:Math.random()*6.28}))}
+function draw(){ctx.clearRect(0,0,innerWidth,innerHeight);for(const s of stars){s.p+=s.s;const alpha=s.a*(.65+.35*Math.sin(s.p));ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(255,239,202,${alpha})`;ctx.fill()}requestAnimationFrame(draw)}
+addEventListener('resize',resize);resize();draw();
+</script>
+</body>
+</html>
